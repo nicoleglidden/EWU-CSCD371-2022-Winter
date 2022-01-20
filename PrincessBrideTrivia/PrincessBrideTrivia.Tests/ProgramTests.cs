@@ -67,7 +67,7 @@ namespace PrincessBrideTrivia.Tests
 
             // Act
             string percentage = Program.GetPercentCorrect(numberOfCorrectGuesses, numberOfQuestions);
-
+            
             // Assert
             Assert.AreEqual(expectedString, percentage);
         }
