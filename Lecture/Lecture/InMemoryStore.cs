@@ -2,9 +2,16 @@
 {
     public class InMemoryStore : IStore
     {
-        public void Save(ISavable savable)
+        public void Save(ISavable item)
         {
-            throw new NotImplementedException();
+            Item = item??throw new NotImplementedException(nameof(item));
         }
+
+        public ISavable? Item { get; private set; }
+    }
+
+    public class DiskStore : IStore
+    {
+
     }
 }
