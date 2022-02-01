@@ -5,13 +5,19 @@ namespace Logger;
 
 public class FileLogger : BaseLogger
 {
-	public FileLogger (string filePath)
+    public string FilePath { get; }
+    public FileLogger (string filePath)
 	{
-		
+        this.FilePath = filePath;
+  
 	}
 
-    public override void Log(LogLevel logLevel, string message)
+    public override void Log(LogLevel logLevel, string? message)
     {
-        throw new NotImplementedException();
+        string path;
+        path = FilePath;
+        string appendText = "hikevin" + Environment.NewLine;
+        File.AppendAllText(path, appendText);
+
     }
 }
