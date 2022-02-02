@@ -14,10 +14,17 @@ public class FileLogger : BaseLogger
 
     public override void Log(LogLevel logLevel, string? message)
     {
+        message = message ?? throw new ArgumentNullException(nameof(message));
         string path;
         path = FilePath;
-        string appendText = "hikevin" + Environment.NewLine;
+        DateTime date = DateTime.Now;
+        string appendText = date + "FilePath" + logLevel + ":" + message +  Environment.NewLine;
         File.AppendAllText(path, appendText);
 
+        string[] readText = File.ReadAllLines(path);
+        foreach (string s in readText)
+        {
+            Console.WriteLine(s);
+        }
     }
 }

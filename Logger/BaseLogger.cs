@@ -7,6 +7,8 @@
 
         public abstract void Log(LogLevel logLevel, string message);
 
+       
+
 
     }
 }

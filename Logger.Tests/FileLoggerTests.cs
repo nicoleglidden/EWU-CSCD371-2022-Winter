@@ -15,9 +15,9 @@ namespace Logger.Tests
             FileLogger logger = new FileLogger(path);
             logger.Log(LogLevel.Information,  "hikevin");
             string[] readText = File.ReadAllLines(path);
-            string lastline = readText[readText.Length - 1];
-
-           bool doescontain = lastline.Contains("hikekvin");
+            string lastline = readText[readText.Length - 4];
+            
+           bool doescontain = lastline.Contains("hikevin");
            Assert.IsTrue(doescontain);
 
         }
