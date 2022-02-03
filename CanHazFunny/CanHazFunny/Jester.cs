@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace CanHazFunny
 {
-    public class Jester : IJokeService, IJokeOutput
+    public class Jester : IJokeService
     {
         public string GetJoke()
+
+
         {
             JokeService jokeService = new JokeService();
             string joke = jokeService.GetJoke();
@@ -26,7 +28,7 @@ namespace CanHazFunny
             {
 
             }
-            
+            Console.WriteLine(joke);
             
             
             JokeOutput jokeOutput = new JokeOutput();
