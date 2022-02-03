@@ -3,6 +3,10 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
+	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	<EnableNETAnalyzers>true</EnableNETAnalyzers>
+	<LangVersion>10.0</LangVersion>
+	<Nullable>enable</Nullable>
   </PropertyGroup>
 
 </Project>
