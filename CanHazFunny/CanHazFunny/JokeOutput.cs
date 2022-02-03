@@ -8,9 +8,9 @@ namespace CanHazFunny
 {
     internal class JokeOutput : IJokeOutput
     {
-        void IJokeOutput.JokeOutput(Output output)
+        public void TellJoke(string text)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(text);
         }
     }
 }
