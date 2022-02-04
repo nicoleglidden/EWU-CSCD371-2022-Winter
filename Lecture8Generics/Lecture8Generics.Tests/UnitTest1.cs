@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace Lecture8Generics.Tests
 {
@@ -61,6 +62,14 @@ namespace Lecture8Generics.Tests
 
             Assert.IsFalse(dicitionary.KeyExists(42));
             Assert.AreEqual(2, dicitionary.Count);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void AddDuplicate_ThrowsException()
+        {
+            Dictionary<int, string> dicitionary = GetTestDictionary();
+            dicitionary.Add(42, "hello");
         }
 
     }
