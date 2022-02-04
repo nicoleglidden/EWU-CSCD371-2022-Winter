@@ -17,9 +17,17 @@ namespace Lecture8Generics.Tests
         {
             Dictionary<int, string> dictionary = GetTestDictionary();
 
-            Assert.AreEqual("Inigo Montoya", dictionary.Get(42));
+            Assert.AreEqual("Inigo Montoya", dictionary[42]);
         }
 
+        [TestMethod]
+        public void Count()
+        {
+            Dictionary<int, string> dictionary = GetTestDictionary();
+
+            Assert.AreEqual(3, dictionary.Count);
+        }
+        
 
         [TestMethod]
         public void Exists()
@@ -35,6 +43,24 @@ namespace Lecture8Generics.Tests
             dictionary.Add(42, "Inigo Montoya");
             dictionary.Add(43, "Princess Buttercup");
             return dictionary;
+        }
+
+        [TestMethod]
+        public void UpdatedValue()
+        {
+            Dictionary<int, string> dictionary = GetTestDictionary();
+            dictionary[42] = "Day";
+
+            Assert.AreEqual("Day", dictionary[42]);
+        }
+
+        public void Remove()
+        {
+            Dictionary<int, string> dicitionary = GetTestDictionary();
+            dicitionary.Remove(42);
+
+            Assert.IsFalse(dicitionary.KeyExists(42));
+            Assert.AreEqual(2, dicitionary.Count);
         }
 
     }
