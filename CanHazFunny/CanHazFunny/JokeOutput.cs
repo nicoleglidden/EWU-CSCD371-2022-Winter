@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 namespace CanHazFunny
 {
-    internal class JokeOutput : IJokeOutput
+    public class JokeOutput : IJokeOutput
     {
-        public void TellJoke(string text)
+        public string? Joke { get; set; }
+
+        public void WriteJoke(string text)
         {
             Console.WriteLine(text);
         }
+
     }
 }

@@ -6,34 +6,31 @@ using System.Threading.Tasks;
 
 namespace CanHazFunny
 {
-    public class Jester : IJokeService
+    public class Jester 
     {
-        public string GetJoke()
+        public IJokeOutput JokeOutput { get; set; }
+        public IJokeService JokeService { get; set; }
 
-
+        public Jester (IJokeService inputJokeService, IJokeOutput inputJokeOutput)
         {
-            JokeService jokeService = new JokeService();
-            string joke = jokeService.GetJoke();
-            return joke;
+            JokeService = inputJokeService;
+            JokeOutput = inputJokeOutput;
         }
 
-        public bool TellJoke()
+        public string TellJoke()
         {
-            string joke = GetJoke();
-            if (joke == null)
+            bool chuckNorrisJoke = false;
+            string joke = "";
+            
+            while (chuckNorrisJoke)
             {
-                return false;
+                joke = JokeService.GetJoke();
+                chuckNorrisJoke = joke.Contains("Chuck Norris");
             }
-            else
-            {
+            
+            JokeOutput.WriteJoke(joke);
+            return joke;
 
-            }
-            Console.WriteLine(joke);
-            
-            
-            JokeOutput jokeOutput = new JokeOutput();
-            string? text = jokeOutput.TellJoke();
-            return text;
         }
     }
 }
