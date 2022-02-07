@@ -8,11 +8,19 @@ namespace CanHazFunny
 {
     public class JokeOutput : IJokeOutput
     {
-        public string? Joke { get; set; }
 
         public void WriteJoke(string text)
         {
+           if (string.IsNullOrWhiteSpace(text))
+           {
+                throw new ArgumentNullException($"{nameof(text)} cannot be null or whitespace.");
+
+           }
+
             Console.WriteLine(text);
+           
+
+            
         }
 
     }

@@ -29,6 +29,7 @@ namespace CanHazFunny
             }
             
             JokeOutput.WriteJoke(joke);
+            
             return joke;
 
         }

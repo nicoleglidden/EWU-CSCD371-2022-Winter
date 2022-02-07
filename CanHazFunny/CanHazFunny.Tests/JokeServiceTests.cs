@@ -11,6 +11,12 @@ namespace CanHazFunny.Tests
     public class JokeServiceTests
     {
         [TestMethod]
+        public void JokeService_NullJoke_Wrong()
+        {
+            JokeService service = new JokeService();
+            Assert.IsNotNull(service.GetJoke());
+        }
+
     }
         
 }

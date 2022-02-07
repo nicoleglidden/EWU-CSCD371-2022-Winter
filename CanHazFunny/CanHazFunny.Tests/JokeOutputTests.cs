@@ -11,12 +11,13 @@ namespace CanHazFunny.Tests
     public class JokeOutputTests
     {
         [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
 
-        public void JokeOutput_WriteJoke_NullJoke_ThrowsException()
+        public void JokeOutput_NullJoke_ThrowsException()
         {
-            JokeOutput output = new JokeOutput();
-            output.WriteJoke();
 
+            JokeOutput output = new();
+            output.WriteJoke(null!); 
 
         }
     }
