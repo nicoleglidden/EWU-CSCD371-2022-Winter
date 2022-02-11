@@ -19,33 +19,34 @@ namespace CanHazFunny.Tests
             }
         }
 
-        public void JesterTests()
+        public class TestingJokeOutput : IJokeOutput
+        {
+            public void WriteJoke(string joke)
+            {
+                Console.WriteLine(joke);
+            }
+        }
+
+        public JesterTests()
         {
 
         }
-       
-        
-
-        public IJokeOutput JokeOutput { get; set; }
-        public IJokeService JokeService { get; set; }
-
-        public JesterTests(IJokeService inputJokeService, IJokeOutput inputJokeOutput)
-        {
-            JokeService = inputJokeService;
-            JokeOutput = inputJokeOutput;
-        }
-
 
         [TestMethod]
-        public void TestingJesterService_GetJoke_ReturnsJoke()
+        public void TellJoke_WithJokeFromService_OutputsJoke()
         {
             IJokeService service = new TestingJokeService();
             service.GetJoke();
             string joke = "";
 
-            JokeOutput.WriteJoke(joke);
+            IJokeOutput output = new TestingJokeOutput();
+            output.WriteJoke(joke);
 
-            Assert.AreEqual(joke, service.GetJoke());
+            Jester jester = new Jester(service, output);
+            jester.TellJoke();
+            
+
+            Assert.AreEqual(joke, jester.TellJoke());
 
 
         }
