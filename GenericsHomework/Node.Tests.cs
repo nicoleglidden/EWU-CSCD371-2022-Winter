@@ -1,5 +1,6 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+
 
 namespace Node.Tests
 {
@@ -7,8 +8,11 @@ namespace Node.Tests
 	public class Class1
 	{
 		[TestMethod]
-		public void 
-		{
-		}
+		public void Exists_Node_ReturnsTrue()
+        {
+
+        }
+		
+		
 	}
 }
