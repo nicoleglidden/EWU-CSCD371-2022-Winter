@@ -1,7 +1,7 @@
 ﻿
 namespace GenericsHomework
 {
-    public class Node<T> where T : notnull 
+    public class Node<T> 
     {
         public Node(T TValue)
         {
@@ -11,14 +11,13 @@ namespace GenericsHomework
         }
 
         public T Value { get; set;}
+        public Node<T> Next { get; private set; }
 
-        public override string ToString()
+        public override string? ToString()
         {
-            string? value = Value.ToString(); 
+            string? value = Value?.ToString(); 
             return value;
         }
-
-        public Node<T> Next { get; private set;}
 
         public void Append(T TValue)
         {
@@ -52,27 +51,28 @@ namespace GenericsHomework
 
         public bool Exists( T TValue)
         {
-            var nextNode = this.Next;
-            var currentNode = this;
+            Node<T> nextNode = this.Next;
+            Node<T> currentNode = this;
+            bool endOfList = false;
+            bool exists = false;
 
-            if (this.Value.Equals(TValue))
+            while (!endOfList && !exists)
             {
-                return true;
-            }
-            
-            
-            while (currentNode != nextNode.Next)
-            {
-                if (nextNode.Value.Equals(TValue))
+                if (currentNode.Value?.Equals(TValue) == true)
                 {
-                    return true;
+                    exists = true;
+                }
+                if (currentNode.Next == this)
+                {
+                    endOfList = true;
                 }
                 nextNode = currentNode.Next;
                 // not at end of list
 
             }
 
-            return false;
+
+            return exists;
         }
 
     }
