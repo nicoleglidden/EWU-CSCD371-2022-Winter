@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+
 
 namespace Assignment
 {
@@ -7,6 +9,7 @@ namespace Assignment
     {
         // 1.
         IEnumerable<string> CsvRows { get; }
+
         
         // 2.
         IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows();
@@ -16,6 +19,7 @@ namespace Assignment
 
         // 4.
         IEnumerable<IPerson> People { get; }
+
 
         // 5.
         IEnumerable<(string FirstName, string LastName)> FilterByEmailAddress(Predicate<string> filter);
