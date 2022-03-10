@@ -8,16 +8,16 @@ namespace Assignment
     public class SampleData : ISampleData
     {
         // 1.
-        public IEnumerable<string> CsvRows => File.ReadAllLines("People.csv").Skip(1).ToList();
+        public IEnumerable<string> CsvRows { get; private set;} = File.ReadAllLines("People.csv").Skip(1);
 
         // 2.
         public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows()
-            => CsvRows.Select(x => x.Split(',')[7]).Distinct().OrderBy(x => x);
+            => CsvRows.Select(x => x.Split(',')[6]).Distinct().OrderBy(x => x);
 
         // 3.
-        public string GetAggregateSortedListOfStatesUsingCsvRows() { return "string"; }
+        public string GetAggregateSortedListOfStatesUsingCsvRows() => string.Join(",", GetUniqueSortedListOfStatesGivenCsvRows().ToArray());
+            
 
-          
 
         // 4.
         public IEnumerable<IPerson> People => throw new NotImplementedException();
@@ -29,5 +29,17 @@ namespace Assignment
         // 6.
         public string GetAggregateListOfStatesGivenPeopleCollection(
             IEnumerable<IPerson> people) => throw new NotImplementedException();
+
+        public SampleData()
+        {
+
+        }
+
+        public SampleData(IEnumerable<string> spokane)
+        {
+            CsvRows = spokane;
+        }
     }
+
+    
 }

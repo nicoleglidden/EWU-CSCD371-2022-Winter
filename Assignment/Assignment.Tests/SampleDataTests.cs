@@ -28,12 +28,16 @@ namespace Assignment.Tests
         public void GetUniqueSortedListOfStatesGivenCsvRows_Hardcode_Test()
         {
             //Arrange
-            //string addresses = "7884 Spokane Way,Spokane,WA,99205, 1234 Spokane Street,Spokane,WA,99201";
+            IEnumerable<string> listOfAddresses = new List<string> { "1,Priscilla,Jenyns,pjenyns0 @state.gov,7884 Spokane Way, Spokane,WA,99205", "2,Karin,Joder,kjoder1@quantcast.com,03594 Florence,Spokane,WA,99201" };
+            SampleData people = new(listOfAddresses);
+
 
             //Act
-
+            var result = people.GetUniqueSortedListOfStatesGivenCsvRows();
 
             //Assert
+            Assert.AreEqual(result.Count(), 1);
+            Assert.AreEqual(result.First(), "WA");
         }
 
         [TestMethod]
@@ -44,10 +48,33 @@ namespace Assignment.Tests
 
 
             //Act
-            var result = people.GetUniqueSortedListOfStatesGivenCsvRows().ToList();
+            
+            IEnumerable<string> statesList = people.GetUniqueSortedListOfStatesGivenCsvRows();
+            IEnumerable<string> expectedStatesList = statesList.OrderBy(s => s);
 
             //Assert 
-            Assert.AreEqual(result.Zip(result.Skip(1), (a, b) => new { a, b }).All(p => p.a.CompareTo(p.b)<0));
+            
+            Assert.AreEqual(expectedStatesList.Count(), statesList.Count());
+            Assert.AreEqual(expectedStatesList.First(), statesList.First());
+        }  
+        
+        [TestMethod]
+
+        public void GetAggregateSortedListOfStatesUsingCsvRows_Test()
+        {
+            //Arrange
+            SampleData people = new();
+
+            //Act
+            string statesList = people.GetAggregateSortedListOfStatesUsingCsvRows();
+            List<string> expectedStatesList = new List<string> { "AL", "AZ", "CA", "DC", "FL", "GA", "IN", "KS", "LA", "MD", "MN", "MO", "MT", "NC", "NE", "NH", "NV", "NY", "OR", "PA", "SC", "TN", "TX", "UT", "VA", "WA", "WV" };
+
+            string combinedStates = string.Join(",", expectedStatesList);
+
+            //Assert
+            Assert.AreEqual(combinedStates.Count(), statesList.Count());
+            Assert.AreEqual(combinedStates.First(), statesList.First());
+            Assert.AreEqual(combinedStates.Last(), statesList.Last());
         }
     }
 }
