@@ -1,14 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
 namespace Assignment
 {
-    public class SampleData : ISampleData
+    public class SampleData : ISampleData IEnumerable<IPerson>
     {
         // 1.
-        public IEnumerable<string> CsvRows { get; private set;} = File.ReadAllLines("People.csv").Skip(1);
+        public IEnumerable<string> CsvRows { get; private set; } = File.ReadAllLines("People.csv").Skip(1);
 
         // 2.
         public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows()
@@ -16,19 +17,45 @@ namespace Assignment
 
         // 3.
         public string GetAggregateSortedListOfStatesUsingCsvRows() => string.Join(",", GetUniqueSortedListOfStatesGivenCsvRows().ToArray());
-            
+
 
 
         // 4.
-        public IEnumerable<IPerson> People => throw new NotImplementedException();
+        public IEnumerable<IPerson> People => CsvRows.Select(line =>
+        {
+            string[] lineParts = line.Split(',');
+            IAddress address = new Address(lineParts[4], lineParts[5], lineParts[6], lineParts[7]);
+            Person person = new Person(lineParts[1], lineParts[2], address, lineParts[3]);
+            return person;
+        }
+        ).OrderBy(p => p.Address.State).ThenBy(p => p.Address.City).ThenBy(p => p.Address.Zip);
+
 
         // 5.
         public IEnumerable<(string FirstName, string LastName)> FilterByEmailAddress(
-            Predicate<string> filter) => throw new NotImplementedException();
+            Predicate<string> filter) => People.Where(l => filter(l.EmailAddress)).Select(l => (l.FirstName, l.LastName));
 
         // 6.
         public string GetAggregateListOfStatesGivenPeopleCollection(
-            IEnumerable<IPerson> people) => throw new NotImplementedException();
+            IEnumerable<IPerson> people) => people.Select(p => p.Address.State).Distinct().Aggregate((stateString, next) => next + ',' + stateString);
+
+        public IEnumerator<IPerson> GetEnumerator()
+        {
+            return
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return 
+        }
+
+       public IEnumerable<T> ChildItems(int maximum) 
+       { 
+        
+
+       }
+
+
 
         public SampleData()
         {
