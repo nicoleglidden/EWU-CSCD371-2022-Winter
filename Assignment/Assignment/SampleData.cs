@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Assignment
 {
-    public class SampleData : ISampleData IEnumerable<IPerson>
+    public class SampleData : ISampleData, IEnumerable<IPerson>
     {
         // 1.
         public IEnumerable<string> CsvRows { get; private set; } = File.ReadAllLines("People.csv").Skip(1);
@@ -39,23 +39,16 @@ namespace Assignment
         public string GetAggregateListOfStatesGivenPeopleCollection(
             IEnumerable<IPerson> people) => people.Select(p => p.Address.State).Distinct().Aggregate((stateString, next) => next + ',' + stateString);
 
+
         public IEnumerator<IPerson> GetEnumerator()
         {
-            return
+            return People.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return 
+            return GetEnumerator();
         }
-
-       public IEnumerable<T> ChildItems(int maximum) 
-       { 
-        
-
-       }
-
-
 
         public SampleData()
         {
