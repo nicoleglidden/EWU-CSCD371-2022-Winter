@@ -23,7 +23,7 @@ namespace Assignment.Tests
             //Assert
             Assert.AreEqual(row2, result[0]);
         }
-        
+
         [TestMethod]
         public void GetUniqueSortedListOfStatesGivenCsvRows_Hardcode_Test()
         {
@@ -48,16 +48,16 @@ namespace Assignment.Tests
 
 
             //Act
-            
+
             IEnumerable<string> statesList = people.GetUniqueSortedListOfStatesGivenCsvRows();
             IEnumerable<string> expectedStatesList = statesList.OrderBy(s => s);
 
             //Assert 
-            
+
             Assert.AreEqual(expectedStatesList.Count(), statesList.Count());
             Assert.AreEqual(expectedStatesList.First(), statesList.First());
-        }  
-        
+        }
+
         [TestMethod]
 
         public void GetAggregateSortedListOfStatesUsingCsvRows_Test()
@@ -75,6 +75,44 @@ namespace Assignment.Tests
             Assert.AreEqual(combinedStates.Count(), statesList.Count());
             Assert.AreEqual(combinedStates.First(), statesList.First());
             Assert.AreEqual(combinedStates.Last(), statesList.Last());
+        }
+
+        [TestMethod]
+
+        public void ISampleData_People_Test()
+        {
+            //Arrange
+            string firstName = "Priscilla";
+            string lastName = "Jenyns";
+            string email = "pjenyns0 @state.gov";
+            string streetAddress = "7884 Spokane Way";
+            string city = "Spokane";
+            string state = "WA";
+            string zip = "99205";
+            string firstName2 = "Brian";
+            string lastName2 = "Troll";
+            string email2 = "brian.troll@underthebridge.com";
+            string streetAddress2 = "1234 Brian Troll Way";
+            string city2 = "San Diego";
+            string state2 = "CA";
+            string zip2 = "92103";
+            IEnumerable<string> listOfAddresses = new List<string> { $"1,{firstName},{lastName},{email},{streetAddress},{city},{state},{zip}", $"2,{firstName2},{lastName2},{email2},{streetAddress2},{city2},{state2},{zip2}" };
+            ISampleData sampleData = new SampleData(listOfAddresses);
+            IAddress address = new Address(streetAddress, city, state, zip);
+            IAddress address2 = new Address(streetAddress2, city2, state2, zip2);
+            IPerson person = new Person(firstName, lastName, address, email);
+            IPerson person2 = new Person(firstName2, lastName2, address2, email2);
+
+
+            //Act
+            IEnumerable<IPerson> humans = sampleData.People;
+            IEnumerable<string> addresses = sampleData.CsvRows;
+
+
+            //Assert
+            Assert.AreEqual(person2, humans.First());
+            Assert.AreEqual(person, humans.Last());
+            Assert.IsNotNull(humans.First().Address);
         }
     }
 }

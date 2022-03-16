@@ -1,6 +1,6 @@
 ﻿namespace Assignment
 {
-    public class Address : IAddress
+    public record class Address : IAddress
     {
         public Address(string streetAddress, string city, string state, string zip)
         {
